@@ -1,0 +1,18 @@
+.hybrids-form {
+  text-align: left;
+  margin: 20px;
+}
+.race-percentage-label {
+  display: flex;
+  margin: 10px;
+}
+.label-name {
+  width: 200px;
+}
+.percentage-input {
+  width: 100px;
+}
+.hybrit-btn-submit {
+  width: 100px;
+  margin-left: 10px;
+}

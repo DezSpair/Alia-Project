@@ -1,0 +1,23 @@
+.weapon-creation-label {
+  display: flex;
+  margin: 10px;
+}
+.label-name {
+  width: 150px;
+}
+.weapon-input-field {
+  width: 400px;
+}
+
+.weapon-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid red;
+}
+
+.weapon-list-item p {
+  margin: 0;
+}
