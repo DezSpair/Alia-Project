@@ -80,10 +80,12 @@ const defaultFate: Fate = {
 };
 
 export class Character {
-  public name: string = "";
+  public userName: string = "";
+  public characterName: string = "";
   public age: number = 0;
   public gender: "male" | "female" | undefined = undefined;
-  private _nature: Nature[] = [];
+  private _nature: string = '';
+  private _subNature: string [] = [];
   private _characteristics: Characteristic[] = defaulCharacteristics;
   private _lifeForce: LifeForce = defaultLifeForce;
   private _initiative: Initiative = defaultInitiative;
@@ -102,6 +104,23 @@ export class Character {
   }
 
   private init() {}
+
+  public get nature() {
+    return this._nature;
+  }
+
+  public set nature(value) {
+    this._nature = value;
+    this._subNature = [];
+  }
+
+  public get subNature(): string[] {
+    return this._subNature;
+  }
+
+  public set subNature(value: string[]) {
+    this._subNature = value;
+  }
 
   public get vitality() {
     return this._characteristics.find(

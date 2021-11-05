@@ -76,3 +76,5 @@ export type Skill = PoolType & {
     text: string;
   };
 };
+
+
