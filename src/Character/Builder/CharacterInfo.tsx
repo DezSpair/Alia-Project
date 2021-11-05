@@ -7,6 +7,11 @@ export const CharacterInfo = observer(() => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
+
+      <div>Имя игрока: {character.userName}</div>
+      <div>Имя персонажа: {character.characterName}</div>
+      <div>Ось характера: {character.nature + ', ' + character.subNature.join(", ")}</div>
+
       <div>str: {character.strength.base + character.strength.bonus}</div>
       <div>dex: {character.dextrity.base + character.dextrity.bonus}</div>
       <div>vit: {character.vitality.base + character.vitality.bonus}</div>
