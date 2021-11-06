@@ -77,4 +77,11 @@ export type Skill = PoolType & {
   };
 };
 
+export type CharacterFeature = {
+  title: string;
+  description: string;
+  talent?: string;
+  initiative?: number;
+}
+
 
