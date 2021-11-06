@@ -8,7 +8,7 @@ export const Names = observer(() => {
     character.userName = e.target.value;
   }
   function onCharacterNameChange(e: React.ChangeEvent<HTMLInputElement>) {
-    character.userName = e.target.value;
+    character.characterName = e.target.value;
   }
 
   return (
