@@ -13,7 +13,7 @@ export default function App() {
     <Context.Provider value={rootStore}>
       <div className="App">
         {/* <Table />
-        <HybridGenerator />
+        <HybridGenerator />a
         <Weapons /> */}
         <Builder />
         <CharacterInfo />

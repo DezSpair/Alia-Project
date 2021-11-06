@@ -9,6 +9,9 @@
   ],
   "main": "src/index.tsx",
   "dependencies": {
+    "@emotion/react": "11.5.0",
+    "@emotion/styled": "11.3.0",
+    "@mui/material": "5.0.6",
     "@types/react-select": "3.0.20",
     "@types/recharts": "1.8.16",
     "mobx": "6.3.3",

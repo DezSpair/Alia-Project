@@ -11,9 +11,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Names } from './Names';
 import { Natures } from './Natures';
+import { CharacterFeatures } from './CharacterFeatures'
 
 const steps = ['Имя игрока и персонажа', 'Ось характера', 'Характеристики', 'Особенности персонажа', 'Судьба', 'Умения', 'Расы'];
-const stepsHtml = [ <Names/>, <Natures />, <Characteristics />]
+const stepsHtml = [ <Names/>, <Natures />, <Characteristics />, <CharacterFeatures />]
 export type LabelProps = {
   optional: any
 };
@@ -41,6 +42,7 @@ export const Builder = () => {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+  };
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
@@ -70,7 +72,7 @@ export const Builder = () => {
   };
 
   return (
-  <div style={{ display: "flex", flexDirection: "column", width: "50%" }}>
+  <div style={{ display: "flex", flexDirection: "column", width: "80%" }}>
     <Box>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
