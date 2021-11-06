@@ -11,7 +11,8 @@ export const CharacterInfo = observer(() => {
       <div>Имя игрока: {character.userName}</div>
       <div>Имя персонажа: {character.characterName}</div>
       <div>Ось характера: {character.nature + ', ' + character.subNature.join(", ")}</div>
-
+      <div>Особенности персонажа: {character.characterFeatures.map(i=>i.title).join(", ")}</div>
+      {character.talents.length > 0 && <div>Таланты: {character.talents.join(", ")}</div>}
       <div>str: {character.strength.base + character.strength.bonus}</div>
       <div>dex: {character.dextrity.base + character.dextrity.bonus}</div>
       <div>vit: {character.vitality.base + character.vitality.bonus}</div>
