@@ -16,9 +16,10 @@ import { CharacterFeatures } from "./CharacterFeatures";
 const steps = {
   "Имя игрока и персонажа": <Names />,
   "Ось характера": <NatureSelector />,
-  "Характеристики": <Characteristics />,
+  Характеристики: <Characteristics />,
   // "Особенности персонажа",
-  "Судьба": <FateSelector />
+  "Особенности персонажа": <CharacterFeatures />,
+  Судьба: <FateSelector />
   // "Умения",
   // "Расы"
 };
