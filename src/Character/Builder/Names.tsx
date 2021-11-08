@@ -1,5 +1,7 @@
+import { TextField } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import * as React from "react";
+import { SimpleCard } from "../../components/cards/SimpleCard";
 import { useRootStore } from "../../store/rootStore";
 
 export const Names = observer(() => {
@@ -12,23 +14,23 @@ export const Names = observer(() => {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <label>
-        Имя игрока:
-        <input
+    <SimpleCard>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <TextField
+          id="userName"
+          label="Имя игрока:"
           value={character.userName}
           onChange={onUserNameChange}
-          id="userName"
+          variant="standard"
         />
-      </label>
-      <label>
-        Имя персонажа:
-        <input
+        <TextField
+          id="characterName"
+          label="Имя персонажа:"
           value={character.characterName}
           onChange={onCharacterNameChange}
-          id="characterName"
+          variant="standard"
         />
-      </label>
-    </div>
+      </div>
+    </SimpleCard>
   );
 });

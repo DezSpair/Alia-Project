@@ -5,19 +5,20 @@ import "./styles.css";
 import { Builder } from "./Character/Builder/Builder";
 import { createRootStore, Context } from "./store/rootStore";
 import { CharacterInfo } from "./Character/Builder/CharacterInfo";
+import { Container } from "@mui/material";
 
 const rootStore = createRootStore();
 
 export default function App() {
   return (
     <Context.Provider value={rootStore}>
-      <div className="App">
+      <Container>
         {/* <Table />
         <HybridGenerator />
         <Weapons /> */}
         <Builder />
         <CharacterInfo />
-      </div>
+      </Container>
     </Context.Provider>
   );
 }
