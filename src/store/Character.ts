@@ -85,8 +85,7 @@ export class Character {
   public characterName: string = "";
   public age: number = 0;
   public gender: "male" | "female" | undefined = undefined;
-  private _nature: string = '';
-  private _subNature: string [] = [];
+  private _natures: Nature[] = [];
   private _characteristics: Characteristic[] = defaulCharacteristics;
   private _lifeForce: LifeForce = defaultLifeForce;
   private _initiative: Initiative = defaultInitiative;
@@ -98,65 +97,35 @@ export class Character {
   private _fate: Fate = defaultFate;
   private _skills: Skill[] = [];
   private _talents: string[] = [];
-  private _characterFeature: CharacterFeature [] = [];
-
+  private _characterFeature: CharacterFeature[] = [];
 
   constructor() {
     makeAutoObservable(this);
-
-    this.init();
   }
 
-  private init() {}
-
-  public get talents(): string[] {
-    return this._talents;
+  public get natures(): Nature[] {
+    return this._natures;
   }
 
-  public get characterFeatures(): CharacterFeature [] {
-    return this._characterFeature;
+  public setNatures(value: Nature[]) {
+    this._natures = value;
   }
 
-  public addCharacterFeature(value: CharacterFeature) {
-    if(this._characterFeature.findIndex(i => i.title == value.title) == -1) {
-      this._characterFeature.push(value);
-      
-      if(value.talent !== undefined) {
-        this._talents.push(value.talent as string);
-      }
+  public get baseNature(): Nature | undefined {
+    return this._natures.find((nature) => nature.base);
+  }
 
-      if(value.initiative !== undefined) {
-        this._initiative.bonus = this._initiative.bonus + (value.initiative as number);
-      }
+  public setBaseNature(nature: Nature | undefined) {
+    if (!this.baseNature && nature) {
+      this._natures.push(nature);
     }
+    this._natures.forEach((item) => {
+      item.base = item.name === nature?.name;
+    });
   }
 
-  public deleteCharacterFeature(value: CharacterFeature) {
-    this._characterFeature = [...this._characterFeature.filter(i => i.title !== value.title)];
-    if(value.talent !== undefined) {
-      this._talents = [...this._talents.filter(i => i !== value.talent)];
-    }
-
-    if(value.initiative !== undefined) {
-      this._initiative.bonus = this._initiative.bonus - (value.initiative as number);
-    }
-  }
-
-  public get nature() {
-    return this._nature;
-  }
-
-  public set nature(value) {
-    this._nature = value;
-    this._subNature = [];
-  }
-
-  public get subNature(): string[] {
-    return this._subNature;
-  }
-
-  public set subNature(value: string[]) {
-    this._subNature = value;
+  public get subNatures(): Nature[] {
+    return this._natures.filter((nature) => !nature.base);
   }
 
   public get vitality() {

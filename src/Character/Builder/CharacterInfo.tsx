@@ -5,14 +5,16 @@ import { useRootStore } from "../../store/rootStore";
 export const CharacterInfo = observer(() => {
   const { character } = useRootStore();
 
+  const subNatureString = character.subNatures
+    .map((subNature) => subNature.name)
+    .join(", ");
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-
       <div>Имя игрока: {character.userName}</div>
       <div>Имя персонажа: {character.characterName}</div>
-      <div>Ось характера: {character.nature + ', ' + character.subNature.join(", ")}</div>
-      <div>Особенности персонажа: {character.characterFeatures.map(i=>i.title).join(", ")}</div>
-      {character.talents.length > 0 && <div>Таланты: {character.talents.join(", ")}</div>}
+      <div>Основная черта характера: {character.baseNature?.name}</div>
+      <div>Дополнительные черты характера: {subNatureString}</div>
       <div>str: {character.strength.base + character.strength.bonus}</div>
       <div>dex: {character.dextrity.base + character.dextrity.bonus}</div>
       <div>vit: {character.vitality.base + character.vitality.bonus}</div>
@@ -26,7 +28,7 @@ export const CharacterInfo = observer(() => {
       </div>
       <div>fate: {character.fate}</div>
       <div>
-        feats:{" "}
+        Особенности персонажа:
         {character.feats.map((feat) => (
           <div key={feat.id} title={feat.text}>
             {feat.name}
