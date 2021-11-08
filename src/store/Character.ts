@@ -103,6 +103,14 @@ export class Character {
     makeAutoObservable(this);
   }
 
+  public get talents(): string[] {
+    return this._talents;
+  }
+
+  public get characterFeatures(): CharacterFeature[] {
+    return this._characterFeature;
+  }
+
   public get natures(): Nature[] {
     return this._natures;
   }
@@ -172,6 +180,37 @@ export class Character {
 
   public get feats() {
     return this._feats;
+  }
+
+  public addCharacterFeature(value: CharacterFeature) {
+    if (
+      this._characterFeature.findIndex((i) => i.title === value.title) === -1
+    ) {
+      this._characterFeature.push(value);
+
+      if (value.talent !== undefined) {
+        this._talents.push(value.talent as string);
+      }
+
+      if (value.initiative !== undefined) {
+        this._initiative.bonus =
+          this._initiative.bonus + (value.initiative as number);
+      }
+    }
+  }
+
+  public deleteCharacterFeature(value: CharacterFeature) {
+    this._characterFeature = [
+      ...this._characterFeature.filter((i) => i.title !== value.title)
+    ];
+    if (value.talent !== undefined) {
+      this._talents = [...this._talents.filter((i) => i !== value.talent)];
+    }
+
+    if (value.initiative !== undefined) {
+      this._initiative.bonus =
+        this._initiative.bonus - (value.initiative as number);
+    }
   }
 
   public setBaseCharacteristics(params: Record<string, number>) {
