@@ -1,9 +1,20 @@
 import { observer } from "mobx-react-lite";
 import * as React from "react";
+import { rollAsArray } from "../../services/diceRoller";
 import { useRootStore } from "../../store/rootStore";
 
 export const Characteristics = observer(() => {
   const { character } = useRootStore();
+
+  function rollCharacteristics() {
+    return [
+      rollAsArray("3d6").filter((roll, i, arr) => roll !== Math.min(...arr)),
+      rollAsArray("3d6").filter((roll, i, arr) => roll !== Math.min(...arr)),
+      rollAsArray("3d6").filter((roll, i, arr) => roll !== Math.min(...arr)),
+      rollAsArray("3d6").filter((roll, i, arr) => roll !== Math.min(...arr)),
+      rollAsArray("3d6").filter((roll, i, arr) => roll !== Math.min(...arr)),
+    ]
+  }
 
   const onParamChange = (e: any) => {
     character.setBaseCharacteristics({
@@ -58,6 +69,7 @@ export const Characteristics = observer(() => {
           type="number"
         />
       </label>
+      <button onClick={rollCharacteristics}>Roll</button>
     </div>
   );
 });

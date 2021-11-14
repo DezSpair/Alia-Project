@@ -13,8 +13,7 @@ import {
   characteristicKey,
   MaxAugmentations,
   MaxMutations,
-  MaxSpecializations,
-  CharacterFeature
+  MaxSpecializations
 } from "./types";
 
 function createDefaultPool(key: string) {
@@ -97,7 +96,6 @@ export class Character {
   private _fate: Fate = defaultFate;
   private _skills: Skill[] = [];
   private _talents: string[] = [];
-  private _characterFeature: CharacterFeature[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -105,10 +103,6 @@ export class Character {
 
   public get talents(): string[] {
     return this._talents;
-  }
-
-  public get characterFeatures(): CharacterFeature[] {
-    return this._characterFeature;
   }
 
   public get natures(): Nature[] {
@@ -182,37 +176,6 @@ export class Character {
     return this._feats;
   }
 
-  public addCharacterFeature(value: CharacterFeature) {
-    if (
-      this._characterFeature.findIndex((i) => i.title === value.title) === -1
-    ) {
-      this._characterFeature.push(value);
-
-      if (value.talent !== undefined) {
-        this._talents.push(value.talent as string);
-      }
-
-      if (value.initiative !== undefined) {
-        this._initiative.bonus =
-          this._initiative.bonus + (value.initiative as number);
-      }
-    }
-  }
-
-  public deleteCharacterFeature(value: CharacterFeature) {
-    this._characterFeature = [
-      ...this._characterFeature.filter((i) => i.title !== value.title)
-    ];
-    if (value.talent !== undefined) {
-      this._talents = [...this._talents.filter((i) => i !== value.talent)];
-    }
-
-    if (value.initiative !== undefined) {
-      this._initiative.bonus =
-        this._initiative.bonus - (value.initiative as number);
-    }
-  }
-
   public setBaseCharacteristics(params: Record<string, number>) {
     this._characteristics.forEach((characteristic) => {
       if (params[characteristic.name] !== undefined) {
@@ -227,7 +190,7 @@ export class Character {
 
   public setFate(fate: FateNamesKey) {
     this._feats.forEach((feat) => {
-      if (feat.type === "fate") this.removeFeat(feat);
+      if (feat.source === "fate") this.removeFeat(feat);
     });
     this._fate = getFateById(fate);
     this._fate.trates.forEach((feat) => this.addFeat(feat));
@@ -235,12 +198,16 @@ export class Character {
 
   public addFeat(feat: Feat) {
     this._feats = [...this._feats, feat];
-    feat.onAdd(this);
+    if (feat.onAdd) {
+      feat.onAdd(this);
+    }
   }
 
   public removeFeat(feat: Feat) {
     this._feats = this._feats.filter((item) => item.id !== feat.id);
-    feat.onRemove(this);
+    if (feat.onRemove) {
+      feat.onRemove(this);
+    }
   }
 
   private calculateBaseLifeForce() {
