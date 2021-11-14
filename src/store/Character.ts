@@ -95,14 +95,9 @@ export class Character {
   private _feats: Feat[] = [];
   private _fate: Fate = defaultFate;
   private _skills: Skill[] = [];
-  private _talents: string[] = [];
 
   constructor() {
     makeAutoObservable(this);
-  }
-
-  public get talents(): string[] {
-    return this._talents;
   }
 
   public get natures(): Nature[] {
@@ -176,6 +171,22 @@ export class Character {
     return this._feats;
   }
 
+  public get isPsyonic() {
+    return this._feats.find((feat) => feat.id === "psyonicTalent");
+  }
+
+  public get isSomnomnic() {
+    return this._feats.find((feat) => feat.id === "somnomnicTalent");
+  }
+
+  public get isMagician() {
+    return this._feats.find((feat) => feat.id === "magicTalent");
+  }
+
+  public get isNecronic() {
+    return this._feats.find((feat) => feat.id === "necronicTalent");
+  }
+
   public setBaseCharacteristics(params: Record<string, number>) {
     this._characteristics.forEach((characteristic) => {
       if (params[characteristic.name] !== undefined) {
@@ -197,7 +208,7 @@ export class Character {
   }
 
   public addFeat(feat: Feat) {
-    this._feats = [...this._feats, feat];
+    this._feats.push(feat);
     if (feat.onAdd) {
       feat.onAdd(this);
     }
@@ -208,6 +219,24 @@ export class Character {
     if (feat.onRemove) {
       feat.onRemove(this);
     }
+  }
+
+  public reset() {
+    this.userName = "";
+    this.characterName = "";
+    this.age = 0;
+    this.gender = undefined;
+    this._natures = [];
+    this._characteristics = defaulCharacteristics;
+    this._lifeForce = defaultLifeForce;
+    this._initiative = defaultInitiative;
+    this._education = defaultEducation;
+    this._maxAugmentations = defaultMaxAugmentations;
+    this._maxMutations = defaultMaxMutation;
+    this._maxSpezializations = defaultMaxSpecializations;
+    this._feats = [];
+    this._fate = defaultFate;
+    this._skills = [];
   }
 
   private calculateBaseLifeForce() {

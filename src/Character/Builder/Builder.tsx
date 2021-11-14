@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import { Names } from "./Names";
 import { NatureSelector } from "./Nature/NatureSelector";
 import { CharacterFeatures } from "./CharacterFeatures";
+import { useRootStore } from "../../store/rootStore";
 
 const steps = {
   "Имя игрока и персонажа": <Names />,
@@ -25,6 +26,7 @@ const steps = {
 };
 
 export const Builder = () => {
+  const { character } = useRootStore();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -37,6 +39,7 @@ export const Builder = () => {
 
   const handleReset = () => {
     setActiveStep(0);
+    character.reset();
   };
 
   return (

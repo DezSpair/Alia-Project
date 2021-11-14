@@ -119,6 +119,12 @@ export const coreFeats: Feat[] = [
     description: "открывает персонажу доступ к умениям некроники."
   },
   {
+    id: "magicTalent",
+    name: "Талант мага",
+    source: "core",
+    description: "открывает персонажу доступ к магическим умениям."
+  },
+  {
     id: "idealGenes",
     name: "Идеальные гены",
     source: "core",
