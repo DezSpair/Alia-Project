@@ -58,16 +58,17 @@ export type MaxSpecializations = PoolType & {
 export type Feat = {
   id: string;
   name: string;
-  text: string;
-  type: "core" | "race" | "fate" | "other";
-  onAdd: (character: Character) => void;
-  onRemove: (character: Character) => void;
+  description: string;
+  source: "core" | "race" | "fate" | "other";
+  onAdd?: (character: Character) => void;
+  onRemove?: (character: Character) => void;
 };
 
 export type Fate = {
   id: string;
   name: FateNamesKey;
   trates: Feat[];
+  description?: string;
 };
 
 export type Skill = PoolType & {
@@ -76,12 +77,3 @@ export type Skill = PoolType & {
     text: string;
   };
 };
-
-export type CharacterFeature = {
-  title: string;
-  description: string;
-  talent?: string;
-  initiative?: number;
-}
-
-

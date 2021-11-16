@@ -1,7 +1,10 @@
 import { observer } from "mobx-react-lite";
 import * as React from "react";
-import { FateNames } from "../../store/Fate";
+import { fates } from "../../store/Fate";
 import { useRootStore } from "../../store/rootStore";
+import { FateItem } from "./Fate/FateItem";
+
+const fateList = Object.entries(fates);
 
 export const FateSelector = observer(() => {
   const { character } = useRootStore();
@@ -12,18 +15,9 @@ export const FateSelector = observer(() => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <label>
-        Fate
-        <select value={character.fate} onChange={onSelect} id="fate">
-          <option value={FateNames["No Fate"]}>{FateNames["No Fate"]}</option>
-          <option value={FateNames.Creator}>{FateNames.Creator}</option>
-          <option value={FateNames.Rebel}>{FateNames.Rebel}</option>
-          <option value={FateNames.Ruler}>{FateNames.Ruler}</option>
-          <option value={FateNames.Seeker}>{FateNames.Seeker}</option>
-          <option value={FateNames.Trickster}>{FateNames.Trickster}</option>
-          <option value={FateNames.Warior}>{FateNames.Warior}</option>
-        </select>
-      </label>
+      {fateList.map((fate) => (
+        <FateItem fate={fate} />
+      ))}
     </div>
   );
 });
