@@ -1,8 +1,6 @@
 import * as React from "react";
-import { useState } from "react";
-import { FateNames } from "../../store/Fate";
 import { Characteristics } from "./Characteristics";
-import { FateSelector } from "./FateSelector";
+import { FateSelector } from "./Fate/FateSelector";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -17,12 +15,12 @@ import { useRootStore } from "../../store/rootStore";
 const steps = {
   "Имя игрока и персонажа": <Names />,
   "Ось характера": <NatureSelector />,
+  Судьба: <FateSelector />,
   Характеристики: <Characteristics />,
   // "Особенности персонажа",
-  "Особенности персонажа": <CharacterFeatures />,
-  Судьба: <FateSelector />
-  // "Умения",
   // "Расы"
+  "Особенности персонажа": <CharacterFeatures />
+  // "Умения",
 };
 
 export const Builder = () => {

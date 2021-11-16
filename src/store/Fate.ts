@@ -67,7 +67,7 @@ const tricksterFate: Fate = {
   trates: []
 };
 
-const fates = {
+export const fates = {
   [FateNames["No Fate"]]: defaultFate,
   [FateNames.Warior]: wariorFate,
   [FateNames.Creator]: creatorFate,

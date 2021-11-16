@@ -68,6 +68,7 @@ export type Fate = {
   id: string;
   name: FateNamesKey;
   trates: Feat[];
+  description?: string;
 };
 
 export type Skill = PoolType & {

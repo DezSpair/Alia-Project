@@ -83,6 +83,7 @@ export class Character {
   public userName: string = "";
   public characterName: string = "";
   public age: number = 0;
+  public maxCoreFeats: number = 2;
   public gender: "male" | "female" | undefined = undefined;
   private _natures: Nature[] = [];
   private _characteristics: Characteristic[] = defaulCharacteristics;
